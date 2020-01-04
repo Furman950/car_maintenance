@@ -1,8 +1,8 @@
 import 'package:car_maintenance/core/models/oil_change.dart';
 import 'package:car_maintenance/core/services/car_api.dart';
+import 'package:car_maintenance/core/util/date_parser.dart';
 import 'package:car_maintenance/core/viewmodels/base_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
 
 class OilChangesViewModel extends BaseModel {
   CarApi _carApi;
@@ -12,7 +12,12 @@ class OilChangesViewModel extends BaseModel {
   List<OilChange> _oilChanges = [];
   List<OilChange> get oilChanges => _oilChanges;
 
-  void setOilChanges(List<OilChange> oilChanges) {
+  addOilChange(OilChange oilChange) {
+    _oilChanges.add(oilChange);
+    notifyListeners();
+  }
+
+  setOilChanges(List<OilChange> oilChanges) {
     _oilChanges = oilChanges;
     notifyListeners();
   }
@@ -26,6 +31,5 @@ class OilChangesViewModel extends BaseModel {
     setBusy(false);
   }
 
-  String dateTimeFormated(int index) =>
-      DateFormat("MM/dd/yyyy hh:mm a").format(_oilChanges[index].dateTime);
+  String dateTimeFormated(int index) => formatDate(_oilChanges[index].dateTime);
 }

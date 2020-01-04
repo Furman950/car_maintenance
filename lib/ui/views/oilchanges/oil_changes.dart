@@ -1,4 +1,6 @@
+import 'package:car_maintenance/core/constants/app_contstants.dart';
 import 'package:car_maintenance/core/models/car.dart';
+import 'package:car_maintenance/core/models/oil_change.dart';
 import 'package:car_maintenance/core/viewmodels/views/oil_changes_view_model.dart';
 import 'package:car_maintenance/ui/views/base_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +25,22 @@ class _OilChangesState extends State<OilChanges> {
       model: OilChangesViewModel(carApi: Provider.of(context)),
       onModelReady: (model) => model.getOilChangesWithVin(car.vin),
       builder: (context, model, child) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () async {
+            final oilChange = await Navigator.pushNamed(
+                context, RoutePath.OilChangeForm,
+                arguments: car.vin);
+            if (oilChange is OilChange) {
+              model.addOilChange(oilChange);
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: const Text('Added Oil Change'),
+                ),
+              );
+            }
+          },
+        ),
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(

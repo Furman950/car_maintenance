@@ -2,6 +2,7 @@ import 'package:car_maintenance/core/constants/app_contstants.dart';
 import 'package:car_maintenance/core/models/car.dart';
 import 'package:car_maintenance/ui/views/CarForm/car_form.dart';
 import 'package:car_maintenance/ui/views/Home/home.dart';
+import 'package:car_maintenance/ui/views/OilChangeForm/oil_change_form.dart';
 import 'package:car_maintenance/ui/views/Oilchanges/oil_changes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class Router {
         return MaterialPageRoute(builder: (_) => OilChanges(car: car));
       case RoutePath.CarForm:
         return MaterialPageRoute(builder: (_) => CarForm());
+      case RoutePath.OilChangeForm:
+        final String vin = settings.arguments;
+        return MaterialPageRoute(builder: (_) => OilChangeForm(vin: vin));
       default:
         return MaterialPageRoute(
           builder: (_) {

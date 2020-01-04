@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
       onModelReady: (model) => model.getMyCars(),
       builder: (context, model, child) => Scaffold(
         floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
           onPressed: () async {
             final car = await Navigator.pushNamed(context, RoutePath.CarForm);
             if (car is Car) {
@@ -31,12 +32,11 @@ class _HomeState extends State<Home> {
               );
             }
           },
-          child: Icon(Icons.add),
         ),
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              title: Text('Your cars'),
+              title: const Text('Your cars'),
               // floating: true,
               flexibleSpace: Placeholder(),
               expandedHeight: 200,
