@@ -14,10 +14,15 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    var CarForm;
     return BaseWidget<HomeViewModel>(
       model: HomeViewModel(carApi: Provider.of(context)),
       onModelReady: (model) => model.getMyCars(),
       builder: (context, model, child) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.pushNamed(context, RoutePath.CarForm),
+          child: Icon(Icons.add),
+        ),
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
