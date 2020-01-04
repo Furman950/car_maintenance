@@ -11,6 +11,11 @@ class HomeViewModel extends BaseModel {
   List<Car> _cars = [];
   List<Car> get cars => _cars;
 
+  addCar(Car car) {
+    _cars.add(car);
+    notifyListeners();
+  }
+
   void setCars(List<Car> cars) {
     cars.forEach((x) => print(x));
     _cars = cars;

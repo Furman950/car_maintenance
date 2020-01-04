@@ -10,14 +10,14 @@ String carToJson(Car data) => json.encode(data.toJson());
 class Car {
   String vin;
   String make;
-  String nickName;
+  String nickname;
   String model;
   int yearManufactured;
 
   Car({
     this.vin,
     this.make,
-    this.nickName,
+    this.nickname,
     this.model,
     this.yearManufactured,
   });
@@ -25,7 +25,7 @@ class Car {
   factory Car.fromJson(Map<String, dynamic> json) => Car(
         vin: json["vin"],
         make: json["make"],
-        nickName: json["nickName"] ?? "",
+        nickname: json["nickname"] ?? "",
         model: json["model"],
         yearManufactured: json["yearManufactured"],
       );
@@ -33,7 +33,7 @@ class Car {
   Map<String, dynamic> toJson() => {
         "vin": vin,
         "make": make,
-        "nickName": nickName ?? "",
+        "nickName": nickname ?? "",
         "model": model,
         "yearManufactured": yearManufactured,
       };
