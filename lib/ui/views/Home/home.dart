@@ -5,13 +5,13 @@ import 'package:car_maintenance/ui/views/base_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:math' as math;
 
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
-//SliverAppBar
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
@@ -43,19 +43,29 @@ class _HomeState extends State<Home> {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (context, index) => Container(
-                  child: ListTile(
-                    title: Text(model.cars[index].model),
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      RoutePath.OilChanges,
-                      arguments: model.cars[index],
-                    ),
-                    subtitle: Text(
-                        '${model.cars[index].vin}\n${model.cars[index].make}\n${model.cars[index].yearManufactured}'),
-                  ),
-                ),
-                childCount: model.cars?.length ?? 0,
+                (context, index) {
+                  final int itemIndex = index ~/ 2;
+                  return index.isEven
+                      ? Container(
+                          child: ListTile(
+                            title: Text(model.cars[itemIndex].model),
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              RoutePath.OilChanges,
+                              arguments: model.cars[itemIndex],
+                            ),
+                            subtitle: Text(
+                                '${model.cars[itemIndex].vin}\n${model.cars[itemIndex].make}\n${model.cars[itemIndex].yearManufactured}'),
+                          ),
+                        )
+                      : Divider(
+                          height: 0,
+                          color: Colors.grey,
+                        );
+                },
+                // semanticIndexCallback: (widget, localIndex) =>
+                //     localIndex.isEven ? localIndex ~/ 2 : null,
+                childCount: math.max(0, (model.cars?.length ?? 0) * 2 - 1),
               ),
             ),
           ],
