@@ -1,5 +1,7 @@
 import 'package:car_maintenance/core/constants/app_contstants.dart';
+import 'package:car_maintenance/core/models/car.dart';
 import 'package:car_maintenance/ui/views/Home/home.dart';
+import 'package:car_maintenance/ui/views/oilchanges/oil_changes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,9 @@ class Router {
     switch (settings.name) {
       case RoutePath.Home:
         return MaterialPageRoute(builder: (_) => Home());
+      case RoutePath.OilChanges:
+        final Car car = settings.arguments;
+        return MaterialPageRoute(builder: (_) => OilChanges(car: car));
       default:
         return MaterialPageRoute(
           builder: (_) {
